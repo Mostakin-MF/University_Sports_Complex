@@ -6,12 +6,6 @@
 ![Build](https://img.shields.io/badge/build-passing-brightgreen.svg)
 
 > A comprehensive full-stack web application for managing university sports facilities, bookings, and tournaments with real-time slot management and administrative controls.
-
-**Developed for:** American International University-Bangladesh (AIUB)  
-**Department:** Computer Science  
-**Faculty:** Faculty of Science & Technology (FST)  
-**Semester:** Summer_23_24
-
 ---
 
 ## 🎯 Project Overview
@@ -85,10 +79,7 @@ The **Universal University Sports Complex Management System** is a modern, scala
 
 ### 1. Clone the Repository
 
-```bash
-git clone https://github.com/yourusername/universal-sports-complex.git
-cd universal-sports-complex
-```
+
 
 ### 2. Setup Backend (NestJS + PostgreSQL)
 

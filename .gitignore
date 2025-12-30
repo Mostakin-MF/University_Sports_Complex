@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+/yarn.lock
+/pnpm-lock.yaml
+
+# Environment variables
+.env
+.env.local
+.env.*
+
+# Build outputs
+dist/
+build/
+.next/
+out/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+coverage/
+
+# NestJS build
+tsconfig.build.tsbuildinfo
