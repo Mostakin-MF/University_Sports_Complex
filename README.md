@@ -5,7 +5,7 @@
 ![Node.js](https://img.shields.io/badge/node.js-v18+-green.svg)
 ![Build](https://img.shields.io/badge/build-passing-brightgreen.svg)
 
-> A comprehensive full-stack web application for managing university sports facilities, bookings, and tournaments with real-time slot management and administrative controls.
+> A comprehensive full-stack web application for managing university sports facilities, bookings, and tournaments.
 ---
 
 ## 🎯 Project Overview
@@ -199,7 +199,7 @@ universal-sports-complex/
 
 ## 🎨 Color Palette & Design System
 
-The application uses a modern, accessible color palette inspired by AIUB's institutional branding:
+The application uses a modern, accessible color palette:
 
 | Color | Hex | Usage |
 |-------|-----|-------|
@@ -431,11 +431,8 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
 
 ---
 
-## 🏫 Institution Information
-
-**Institution:** American International University-Bangladesh (AIUB)  
-**Department:** Computer Science  
-**Faculty:** Faculty of Science & Technology (FST)
+**Institution:** University
+**Department:** Computer Science
 
 ---
 
@@ -462,7 +459,7 @@ For issues, questions, or suggestions:
 
 ## 🙏 Acknowledgments
 
-- AIUB Faculty and Department of Computer Science
+- University Faculty and Department of Computer Science
 - All stakeholders and users who provided feedback
 - Open source community for excellent tools and libraries
 

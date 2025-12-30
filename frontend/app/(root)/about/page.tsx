@@ -15,7 +15,7 @@ export default function AboutPage() {
         <section className="space-y-4">
           <h2 className="text-3xl font-bold">Our Goal</h2>
           <p className="text-lg leading-relaxed text-muted-foreground">
-            The Universal University Sports Complex Management System is a comprehensive, modern web application designed to streamline facility booking, provide transparent information, and optimize facility utilization for American International University-Bangladesh (AIUB).
+            The Universal University Sports Complex Management System is a comprehensive, modern web application designed to streamline facility booking, provide transparent information, and optimize facility utilization for our University.
           </p>
         </section>
 
@@ -47,8 +47,8 @@ export default function AboutPage() {
         <section className="rounded-xl bg-muted/50 p-8 text-center">
           <h3 className="mb-4 text-2xl font-bold">Developed By</h3>
           <p className="text-lg font-medium">Department of Computer Science</p>
-          <p className="text-muted-foreground">American International University-Bangladesh (AIUB)</p>
-          <p className="mt-2 text-sm text-muted-foreground">Semester: Summer_23_24 | Version: 1.0.0</p>
+          <p className="text-muted-foreground">University Sports Management</p>
+          <p className="mt-2 text-sm text-muted-foreground">Version: 1.0.0</p>
         </section>
       </div>
     </div>

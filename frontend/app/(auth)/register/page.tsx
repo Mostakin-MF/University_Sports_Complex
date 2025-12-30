@@ -6,14 +6,15 @@ import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
+import { authService } from "@/lib/services/authService"
 
 import { Button } from "@/components/ui/Button"
 import { Input } from "@/components/ui/Input"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/Card"
 
 const registerSchema = z.object({
-  fullName: z.string().min(2, "Full name must be at least 2 characters"),
-  studentId: z.string().min(1, "Student ID is required"),
+  full_name: z.string().min(2, "Full name must be at least 2 characters"),
+  student_id: z.string().min(1, "Student ID is required"),
   email: z.string().email("Invalid email address"),
   password: z.string().min(8, "Password must be at least 8 characters"),
   confirmPassword: z.string()
@@ -27,6 +28,7 @@ type RegisterFormValues = z.infer<typeof registerSchema>
 export default function RegisterPage() {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
   
   const {
     register,
@@ -38,15 +40,17 @@ export default function RegisterPage() {
 
   async function onSubmit(data: RegisterFormValues) {
     setIsLoading(true)
+    setError(null)
     
-    // TODO: Implement actual registration logic
-    console.log("Register data:", data)
-    
-     // Simulate API call
-    setTimeout(() => {
-        setIsLoading(false)
-        router.push("/login")
-    }, 1000)
+    try {
+      const { confirmPassword, ...registerData } = data
+      await authService.register(registerData)
+      router.push("/login")
+    } catch (err: any) {
+      setError(err.response?.data?.message || "Registration failed. Email might already exist.")
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -58,32 +62,37 @@ export default function RegisterPage() {
         </CardDescription>
       </CardHeader>
       <CardContent>
+        {error && (
+          <div className="mb-4 p-3 rounded-md bg-destructive/15 text-destructive text-sm font-medium border border-destructive/20">
+            {error}
+          </div>
+        )}
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
            <div className="space-y-2">
-            <label htmlFor="fullName" className="text-sm font-medium leading-none">
+            <label htmlFor="full_name" className="text-sm font-medium leading-none">
               Full Name
             </label>
             <Input
-              id="fullName"
+              id="full_name"
               placeholder="John Doe"
-              {...register("fullName")}
+              {...register("full_name")}
             />
-            {errors.fullName && (
-              <p className="text-sm text-destructive">{errors.fullName.message}</p>
+            {errors.full_name && (
+              <p className="text-sm text-destructive">{errors.full_name.message}</p>
             )}
           </div>
           
            <div className="space-y-2">
-            <label htmlFor="studentId" className="text-sm font-medium leading-none">
+            <label htmlFor="student_id" className="text-sm font-medium leading-none">
               Student ID
             </label>
             <Input
-              id="studentId"
+              id="student_id"
               placeholder="XX-XXXXX-X"
-              {...register("studentId")}
+              {...register("student_id")}
             />
-            {errors.studentId && (
-              <p className="text-sm text-destructive">{errors.studentId.message}</p>
+            {errors.student_id && (
+              <p className="text-sm text-destructive">{errors.student_id.message}</p>
             )}
           </div>
 
@@ -94,7 +103,7 @@ export default function RegisterPage() {
             <Input
               id="email"
               type="email"
-              placeholder="student@aiub.edu"
+              placeholder="student@university.edu"
               {...register("email")}
             />
             {errors.email && (

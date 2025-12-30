@@ -59,14 +59,14 @@ export function Footer() {
               Contact
             </h4>
              <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>AIUB Campus</li>
+              <li>University Campus</li>
               <li>Dhaka, Bangladesh</li>
-              <li>sports@aiub.edu</li>
+              <li>sports@university.edu</li>
             </ul>
           </div>
         </div>
         <div className="mt-8 border-t pt-8 text-center text-sm text-muted-foreground">
-          © {new Date().getFullYear()} AIUB Sports Complex. All rights reserved.
+          © {new Date().getFullYear()} University Sports Complex. All rights reserved.
         </div>
       </div>
     </footer>

@@ -1,10 +1,10 @@
 # Universal University Sports Complex Management System
 ## Detailed Project Specification & Development Guide
 
-**Institution:** American International University-Bangladesh (AIUB)  
-**Department:** Computer Science  
-**Semester:** Summer_23_24  
-**Version:** 1.0.0  
+**Institution:** University
+**Department:** Computer Science
+**Semester:** Summer_23_24
+**Version:** 1.0.0
 **Last Updated:** December 2024
 
 ---
@@ -30,7 +30,7 @@
 
 ### Problem Statement
 
-The current university sports complex management at AIUB suffers from:
+The current university sports complex management at our University suffers from:
 - **Inefficient Booking System:** Manual processes leading to double bookings and confusion
 - **Limited Information Access:** No real-time facility availability updates
 - **Underutilization:** Poor scheduling and facility management

@@ -5,8 +5,10 @@ import { useRouter } from "next/navigation"
 
 interface User {
   id: string
-  name: string
+  full_name: string
   email: string
+  student_id?: string
+  phone_number?: string
   role: "STUDENT" | "ADMIN" | "STAFF"
 }
 

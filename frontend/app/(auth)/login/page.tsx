@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
+import { authService } from "@/lib/services/authService"
+import { useAuth } from "@/context/AuthContext"
 
 import { Button } from "@/components/ui/Button"
 import { Input } from "@/components/ui/Input"
@@ -21,7 +23,9 @@ type LoginFormValues = z.infer<typeof loginSchema>
 
 export default function LoginPage() {
   const router = useRouter()
+  const { login } = useAuth()
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
   
   const {
     register,
@@ -33,15 +37,17 @@ export default function LoginPage() {
 
   async function onSubmit(data: LoginFormValues) {
     setIsLoading(true)
+    setError(null)
     
-    // TODO: Implement actual login logic
-    console.log("Login data:", data)
-    
-    // Simulate API call
-    setTimeout(() => {
-        setIsLoading(false)
-        router.push("/dashboard")
-    }, 1000)
+    try {
+      const result = await authService.login(data)
+      login(result.access_token, result.user)
+      // Redirection is handled in AuthContext.login
+    } catch (err: any) {
+      setError(err.response?.data?.message || "Invalid email or password")
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -53,6 +59,11 @@ export default function LoginPage() {
         </CardDescription>
       </CardHeader>
       <CardContent>
+        {error && (
+          <div className="mb-4 p-3 rounded-md bg-destructive/15 text-destructive text-sm font-medium border border-destructive/20">
+            {error}
+          </div>
+        )}
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div className="space-y-2">
             <label htmlFor="email" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
@@ -61,7 +72,7 @@ export default function LoginPage() {
             <Input
               id="email"
               type="email"
-              placeholder="student@aiub.edu"
+              placeholder="student@university.edu"
               {...register("email")}
             />
             {errors.email && (

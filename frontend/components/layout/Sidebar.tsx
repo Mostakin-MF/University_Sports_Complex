@@ -52,29 +52,35 @@ export function Sidebar() {
       </div>
       <div className="flex-1 overflow-y-auto py-4">
         <nav className="space-y-1 px-3">
-          {filteredLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={cn(
-                "group flex items-center rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-muted hover:text-foreground",
-                pathname === link.href
-                  ? "bg-primary/10 text-primary"
-                  : "text-muted-foreground"
-              )}
-            >
-              <link.icon
+          {filteredLinks.map((link) => {
+            const isActive = pathname === link.href || (link.href !== '/dashboard' && pathname.startsWith(link.href));
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
                 className={cn(
-                  "mr-3 h-5 w-5 flex-shrink-0 transition-colors",
-                  pathname === link.href
-                    ? "text-primary"
-                    : "text-muted-foreground group-hover:text-foreground"
+                  "group relative flex items-center rounded-r-xl px-3 py-2.5 text-sm font-medium transition-all duration-200",
+                  isActive
+                    ? "bg-primary/10 text-primary"
+                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
                 )}
-                aria-hidden="true"
-              />
-              {link.name}
-            </Link>
-          ))}
+              >
+                {isActive && (
+                  <div className="absolute left-0 top-1.5 bottom-1.5 w-1 bg-primary rounded-r-full" />
+                )}
+                <link.icon
+                  className={cn(
+                    "mr-3 h-5 w-5 flex-shrink-0 transition-colors",
+                    isActive
+                      ? "text-primary"
+                      : "text-muted-foreground group-hover:text-foreground"
+                  )}
+                  aria-hidden="true"
+                />
+                {link.name}
+              </Link>
+            );
+          })}
         </nav>
       </div>
       <div className="border-t p-4">

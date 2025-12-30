@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
   title: "Universal University Sports Complex",
-  description: "A comprehensive sports complex management system for AIUB",
+  description: "A comprehensive sports complex management system for University",
 };
 
 export default function RootLayout({

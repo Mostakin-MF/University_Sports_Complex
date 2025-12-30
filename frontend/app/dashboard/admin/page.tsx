@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
 import { bookingService } from '@/lib/services/bookingService';
 import { HiUsers, HiChartPie, HiCash, HiShieldCheck } from 'react-icons/hi';
@@ -39,20 +40,20 @@ export default function AdminDashboard() {
       </div>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        <div className="bg-card p-6 rounded-xl border shadow-sm flex items-center gap-4">
+        <Link href="/dashboard/admin/users" className="bg-card p-6 rounded-xl border shadow-sm flex items-center gap-4 hover:border-primary transition-colors">
           <div className="p-3 bg-blue-100 text-blue-600 rounded-lg"><HiUsers className="text-2xl" /></div>
           <div>
             <div className="text-sm text-muted-foreground">Total Users</div>
             <div className="text-2xl font-bold">{stats.users}</div>
           </div>
-        </div>
-        <div className="bg-card p-6 rounded-xl border shadow-sm flex items-center gap-4">
+        </Link>
+        <Link href="/dashboard/bookings" className="bg-card p-6 rounded-xl border shadow-sm flex items-center gap-4 hover:border-primary transition-colors">
           <div className="p-3 bg-green-100 text-green-600 rounded-lg"><HiChartPie className="text-2xl" /></div>
           <div>
             <div className="text-sm text-muted-foreground">Total Bookings</div>
             <div className="text-2xl font-bold">{stats.bookings}</div>
           </div>
-        </div>
+        </Link>
         <div className="bg-card p-6 rounded-xl border shadow-sm flex items-center gap-4">
           <div className="p-3 bg-yellow-100 text-yellow-600 rounded-lg"><HiCash className="text-2xl" /></div>
           <div>
@@ -75,7 +76,7 @@ export default function AdminDashboard() {
           <div className="space-y-3">
              {[1,2,3].map(i => (
                <div key={i} className="flex justify-between text-sm py-2 border-b last:border-0">
-                 <span className="text-muted-foreground">New User Registered: student_{i}@aiub.edu</span>
+                 <span className="text-muted-foreground">New User Registered: student_{i}@university.edu</span>
                  <span className="text-xs">2 mins ago</span>
                </div>
              ))}
