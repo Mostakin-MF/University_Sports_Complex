@@ -4,18 +4,40 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 // Utilizing react-icons as Lucide is not verified
-import { HiHome, HiCalendar, HiUserGroup, HiCog, HiLogout, HiTicket } from "react-icons/hi"
+import { useAuth } from "@/context/AuthContext"
+// Utilizing react-icons as Lucide is not verified
+import { HiHome, HiCalendar, HiUserGroup, HiCog, HiLogout, HiTicket, HiChartBar, HiPlus } from "react-icons/hi"
 
-const sidebarLinks = [
-  { name: "Overview", href: "/dashboard", icon: HiHome },
-  { name: "Bookings", href: "/dashboard/bookings", icon: HiTicket },
-  { name: "Tournaments", href: "/dashboard/tournaments", icon: HiUserGroup },
-  { name: "Schedule", href: "/dashboard/schedule", icon: HiCalendar },
-  { name: "Settings", href: "/dashboard/settings", icon: HiCog },
+const commonLinks = [
+  { name: "Overview", href: "/dashboard", icon: HiHome, roles: ["STUDENT", "STAFF", "ADMIN"] },
+  { name: "Bookings", href: "/dashboard/bookings", icon: HiTicket, roles: ["STUDENT", "ADMIN"] },
+  { name: "Tournaments", href: "/dashboard/tournaments", icon: HiUserGroup, roles: ["STUDENT", "ADMIN"] },
+  { name: "Settings", href: "/dashboard/settings", icon: HiCog, roles: ["STUDENT", "STAFF", "ADMIN"] },
 ]
+
+const studentLinks = [
+  { name: "My Activity", href: "/dashboard/student", icon: HiChartBar, roles: ["STUDENT"] },
+]
+
+const staffLinks = [
+  { name: "Manage Slots", href: "/dashboard/staff", icon: HiPlus, roles: ["STAFF"] },
+  { name: "Maintenance", href: "/dashboard/staff/maintenance", icon: HiCog, roles: ["STAFF"] },
+]
+
+const adminLinks = [
+  { name: "Admin Panel", href: "/dashboard/admin", icon: HiChartBar, roles: ["ADMIN"] },
+  { name: "User Management", href: "/dashboard/admin/users", icon: HiUserGroup, roles: ["ADMIN"] },
+]
+
+const allLinks = [...commonLinks, ...studentLinks, ...staffLinks, ...adminLinks]
 
 export function Sidebar() {
   const pathname = usePathname()
+  const { user, logout } = useAuth()
+
+  const filteredLinks = allLinks.filter(link => 
+    user && link.roles.includes(user.role)
+  )
 
   return (
     <div className="flex h-full w-64 flex-col border-r bg-card text-card-foreground">
@@ -30,7 +52,7 @@ export function Sidebar() {
       </div>
       <div className="flex-1 overflow-y-auto py-4">
         <nav className="space-y-1 px-3">
-          {sidebarLinks.map((link) => (
+          {filteredLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
@@ -57,6 +79,7 @@ export function Sidebar() {
       </div>
       <div className="border-t p-4">
         <button
+          onClick={logout}
           className="flex w-full items-center rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
         >
           <HiLogout className="mr-3 h-5 w-5" />
